@@ -18,4 +18,4 @@ function searchForNum(arr1, arr2) {
 
 console.log(searchForNum([7, 5, 5, 5, 5, 8, 2, 7],
 
-    [3, 1, 5]))
+    [3, 1, 5]));
