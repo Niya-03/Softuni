@@ -13,7 +13,7 @@ function lastKNumbersSequance(n, k) {
         seq.push(sum);
     }
 
-    return seq;
+    return seq.join(" ");
 }
 
 lastKNumbersSequance(8, 2)

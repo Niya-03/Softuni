@@ -2,7 +2,6 @@ function sorting(arr) {
     let sorted = arr.sort((a, b) => a - b);
     let length = arr.length;
     let newArr = [];
-    console.log(sorted);
 
     for (let i = 0; i < length; i++) {
         let firstElement = sorted.pop();
