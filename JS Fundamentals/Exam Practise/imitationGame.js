@@ -1,50 +1,56 @@
 function imitationGame(input) {
     let message = input.shift();
-    if(input.length < 1){
-        return `The decrypted message is: ${message}`;
-    }
 
-    while (input[0] !== "Decode") {
-        let tokens = input.shift().split("|");
-        let command = tokens[0];
-        let data1 = tokens[1];
-        let data2 = tokens[2];
+    for (let i = 0; i < input.length; i++) {
+        if (input[i] == "Decode") {
+            break;
+        } else {
+            let tokens = input[i].split("|");
+            let command = tokens[0];
+            let i1 = tokens[1];
+            let i2 = tokens[2];
 
-        if (command == "Move") {
-            let numOfLetters = Number(data1);
+            if (command == "Move") {
+                let number = Number(i1);
+                message = message.split("")
+                let toMove = message.splice(0, number, "");
+                message = message.join("");
+                message += toMove.join("");
 
-            if(numOfLetters > message.length || numOfLetters <= 0){
-                continue;
-            }
+            } else if (command == "Insert") {
+                let insertIndex = Number(i1);
 
-            message = message.split("");
-            let toBeMoved = message.splice(0, numOfLetters).join("");
-            message = message.join("");
-            message+=toBeMoved;
+                if (insertIndex <= message.length) {
+                    let substr = i2.split("");
+                    message = message.split("");
 
-        } else if (command == "Insert") {
-            let insertIndex = Number(data1);
-            if(insertIndex < 0 || insertIndex > message.length){
-                continue;
-            }
-            message = message.split("");
-            message.splice(insertIndex, 0, data2);
-            message = message.join("");
+                    for (let i = 0; i < substr.length; i++) {
+                        message.splice(insertIndex + i, 0, substr[i]);
+                    }
 
-        } else if (command == "ChangeAll") {
-            if(message.includes(data1)){
-                message = message.replace(new RegExp(data1, "g"), data2);
+                    message = message.join("");
+                }
+
+            } else if (command == "ChangeAll") {
+
+                while(message.includes(i1)){
+                    message = message.replace(i1, i2);
+                }
+                // message = message.replace(new RegExp(i1, "g"), i2);
             }
         }
     }
 
-    console.log(`The decrypted message is: ${message}`);
+    console.log(`The decrypted message is: ${message}`)
 }
 
 imitationGame([
     'owyouh',
-    
-    
-  ]
-  
+    'Move|2',
+    'Move|3',
+    'Insert|3|are',
+    'Insert|9|?',
+    'Decode',
+]
+
 );

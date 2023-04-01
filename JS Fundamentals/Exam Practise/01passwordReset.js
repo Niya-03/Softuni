@@ -2,65 +2,52 @@ function passwordReset(input) {
     let string = input.shift();
     let rawPass = "";
 
-    let index = 0;
-    command = input[index];
+    while (input[0] != "Done") {
 
-    while (command != "Done") {
-
-        command = command.split(" ");
+        command = input.shift().split(" ");
         let commandName = command[0];
 
-        switch (commandName) {
-            case "TakeOdd": 
-
+        if (commandName == "TakeOdd") {
             rawPass = string.split("");
-            rawPass = rawPass.filter((symbol, index) => {return index % 2 !== 0});
+            rawPass = rawPass.filter((symbol, index) => { return index % 2 !== 0 });
             rawPass = rawPass.join("");
             console.log(rawPass);
+        } else if (commandName == "Cut") {
+            let cutIndex = Number(command[1]);
+            let length = Number(command[2]);
 
-                break;
+            rawPass = rawPass.split("");
+            rawPass.splice(cutIndex, length);
+            rawPass = rawPass.join("");
 
-            case "Cut":
+            console.log(rawPass);
+        } else if (commandName == "Substitute") {
+            let substring = command[1];
+            let substitute = command[2];
 
-                let cutIndex = Number(command[1]);
-                let length = Number(command[2]);
-                let substr = rawPass.substr(cutIndex, length);
+            if (rawPass.includes(substring)) {
 
-                rawPass = rawPass.replace(substr,"");
-                console.log(rawPass);
-
-                break;
-
-            case "Substitute":
-
-                let substring = command[1];
-                let substitute = command[2];
-
-                if (rawPass.includes(substring)) {         
-                    rawPass = rawPass.replace(new RegExp(substring, "g"), substitute);
-                    console.log(rawPass);
-                } else {
-                    console.log("Nothing to replace!");
+                while (rawPass.includes(substring)) {
+                    rawPass = rawPass.replace(substring, substitute)
                 }
-
-            break;
+                console.log(rawPass);
+            } else {
+                console.log("Nothing to replace!");
+            }
         }
-
-        index++;
-        command = input[index];
     }
 
-    if(rawPass.length === 0 ){
-        console.log(`Your password is: ${string}`);
-    }else{
         console.log(`Your password is: ${rawPass}`);
-    }
-    
+
 }
 
 passwordReset((["Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr", 
-
+"TakeOdd",
+"Cut 15 3",
+"Substitute :: -",
+"Substitute | ^",
 "Done"])
+
 
 
 
