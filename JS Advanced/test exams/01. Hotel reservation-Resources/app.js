@@ -62,7 +62,6 @@ function solve() {
 
     function createPreview(firstName, lastName, dateIn, dateOut, peopleCount) {
         const element = createInfo(firstName, lastName, dateIn, dateOut, peopleCount);
-        //element.className = 'reservation-content';
 
         const editBtn = e('button', 'Edit');
         editBtn.className = 'edit-btn';
