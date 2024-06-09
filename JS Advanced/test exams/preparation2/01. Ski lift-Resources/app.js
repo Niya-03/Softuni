@@ -22,7 +22,6 @@ function solve() {
 
     function onNextClick(event) {
 
-        debugger;
         event.preventDefault();
         for (const key in inputs) {
             if (inputs[key].value == "") {
@@ -35,8 +34,6 @@ function solve() {
         const peopleCount = Number(inputs.peopleCount.value);
         const fromDate = inputs.fromDate.value;
         const daysCount = Number(inputs.daysCount.value);
-
-
 
         const result = createPreview(firstName, lastName, peopleCount, fromDate, daysCount);
         ticketInfoList.appendChild(result);
@@ -106,16 +103,14 @@ function solve() {
         cancelBtn.className = 'cancel-btn';
         cancelBtn.addEventListener('click', onFinishClick.bind(null, false));
 
-
         element.appendChild(confirmBtn);
         element.appendChild(cancelBtn);
 
         return element;
-
     }
 
     function onFinishClick(confirmed) {
-        debugger
+
         if (confirmed) {
             body.removeChild(main);
             const thank = e('h1', 'Thank you, have a nice day!');
@@ -127,7 +122,6 @@ function solve() {
 
             body.appendChild(thank);
             body.appendChild(backBtn);
-            //proveri za space mejdu ! i '
         } else {
             confirmTicket.textContent = '';
             nextBtn.disabled = false;
