@@ -17,45 +17,46 @@ function attachEvents() {
         allComments: 'http://localhost:3030/jsonstore/blog/comments'
     }
 
-    async function loadPost(ev){
+    async function loadPost(ev) {
 
         const response = await fetch(endpoints.allPost);
         const data = await response.json();
-        selectRef.innerHTML='';
-        debugger;
+        selectRef.innerHTML = '';
+
         Object.values(data).forEach(post => {
             selectRef.appendChild(createOptionElement(post));
         })
     }
 
 
-    function createOptionElement(data){
+    function createOptionElement(data) {
         const op = document.createElement('option');
         op.value = data.id;
         op.textContent = data.title;
         return op;
     }
 
-    async function viewPost(ev){
+    async function viewPost(ev) {
         const currentPostId = selectRef.selectedOptions[0].value;
         const responseWithSinglePost = await fetch(endpoints.allPost + '/' + currentPostId);
         const singlePostData = await responseWithSinglePost.json();
+        const currentPost = Object.values(singlePostData).filter(x => x.id === currentPost.id);
         const responseComments = await fetch(endpoints.allComments);
         const dataComments = await responseComments.json();
         const filteredComments = Object.values(dataComments).filter(x => x.postId == currentPostId);
-        postTitleRef.textContent = singlePostData.title;
-        postBodyRef.textContent = singlePostData.body;
+        postTitleRef.textContent = currentPost.title;
+        postBodyRef.textContent = currentPost.body;
 
-        postComments.innerHTML='';
+        postComments.innerHTML = '';
 
         filteredComments.forEach(element => {
-            const el =  createListItem(element);
+            const el = createListItem(element);
             postComments.appendChild(el);
         });
-        
+
     }
 
-    function createListItem(data){
+    function createListItem(data) {
         const li = document.createElement('li');
         li.id = data.id;
         li.textContent = data.text;
