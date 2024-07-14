@@ -15,7 +15,7 @@ export async function showDetailView(ctx, data){
     const idea = await dataService.getIdea(id);
     const isOwner = hasOwner(idea._ownerId);
     detailsSection.innerHTML = createIdeaTemplate(idea, isOwner);
-    detailsSection.querySelector('a').addEventListener('click', onDelete);
+    detailsSection.querySelector('a')?.addEventListener('click', onDelete);
 }
 
 async function onDelete(e){
