@@ -27,11 +27,16 @@ async function deleteMotor(id){
     return await del(endpoints.SingleMotor+id);
 }
 
+async function searchByQuery(query){
+    return await get(`/data/motorcycles?where=model%20LIKE%20%22${query}%22`);
+}
+
 
 export {
     getMotors,
     addMotor,
     getSingleMotor,
     editMotor,
-    deleteMotor
+    deleteMotor,
+    searchByQuery
 }

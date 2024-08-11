@@ -8,6 +8,7 @@ import { showDashboardView } from './views/dashboardView.js';
 import { showAddView } from './views/addView.js';
 import { showDetailsView } from './views/detailsView.js';
 import { showEditView } from './views/editView.js';
+import { showSearchView } from './views/searchView.js';
 
 updateNav();
 
@@ -18,7 +19,8 @@ page('/dashboard',showDashboardView);
  page('/register',showRegisterView);
 page('/add', showAddView)
 page('/details/:id', showDetailsView);
-page('/edit/:id', showEditView)
+page('/edit/:id', showEditView);
+page('/search', showSearchView);
 
 
 page.start();
